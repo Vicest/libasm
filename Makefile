@@ -6,101 +6,76 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/03/10 14:10:05 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/03/20 20:11:13 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OS := $(shell uname)
-
 SRC_FILES :=
-SRC_FILES +=		main.c
-SRC_FILES +=		error.c
-SRC_FILES +=		validations.c
-SRC_FILES +=		inside_check.c
-SRC_FILES +=		plane.c
-SRC_FILES +=		triangle.c
-SRC_FILES +=		sphere.c
-SRC_FILES +=		square.c
-SRC_FILES +=		cylinder.c
-SRC_FILES +=		colour_utils.c
-SRC_FILES +=		math_utils.c
-SRC_FILES +=		vectors.c
-SRC_FILES +=		vectors_2.c
-SRC_FILES +=		rotations.c
-SRC_FILES +=		interactions.c
-SRC_FILES +=		camera_list.c
-SRC_FILES +=		light_stack.c
-SRC_FILES +=		ray_tracer.c
-SRC_FILES +=		config_reader.c
-SRC_FILES +=		save_functions.c
-SRC_FILES +=		save_functions_2.c
-SRC_FILES +=		bmpstore.c
-SRC_FILES +=		get_next_line.c
-SRC_FILES +=		get_next_line_utils.c
-OBJ_FILES := $(patsubst %.c, %.o, $(SRC_FILES))
+SRC_FILES +=		ft_strlen.s
+SRC_FILES +=		ft_strcpy.s
+SRC_FILES +=		ft_strcmp.s
+SRC_FILES +=		ft_strdup.s
+SRC_FILES +=		ft_write.s
+SRC_FILES +=		ft_read.s
+OBJ_FILES := $(patsubst %.s, %.o, $(SRC_FILES))
+
+SRC_BNS_FILES :=
+SRC_BNS_FILES +=		ft_atoi_base.s
+SRC_BNS_FILES +=		ft_list_push_front.s
+SRC_BNS_FILES +=		ft_list_size.s
+SRC_BNS_FILES +=		ft_list_size.s
+SRC_BNS_FILES +=		ft_list_remove_if.s
+OBJ_BNS_FILES := $(patsubst %.s, %.o, $(SRC_BNS_FILES))
 
 SRC_DIR := sources/
 OBJ_DIR := objects/
-INC_DIR := includes/
+
+TST_FILES :=
+TST_FILES +=		tester.c
 
 SRC :=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ :=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-LIBFT := libft.a
-MLX := libmlx.a
+SRC_BNS :=	$(addprefix $(SRC_DIR), $(SRC_BNS_FILES))
+OBJ_BNS :=	$(addprefix $(OBJ_DIR), $(OBJ_BNS_FILES))
 
-NAME = miniRT
+NAME := libasm.a
 
-CC := cc
-CFLAGS := -g -Wall -Werror -Wextra -I$(INC_DIR) #-fsanitize=address
-LFLAGS := -L. -lft -lmlx -lm
-ifeq ($(OS), Linux)
-	LFLAGS += -lXext -lX11
+AS := ~/.brew/Cellar/nasm/2.15.05/bin/nasm
+ifeq ($(shell uname), Linux)
+ASFLAGS := -f elf64 -g
 else
-	LFLAGS += -framework OpenGL -framework AppKit
+ASFLAGS := -f macho64 -g
 endif
+
 AR := ar
 ARFLAGS := -rc
 
-.PHONY: all re clean fclean pft
+CC := cc
+CFLAGS := -g -Wall -Werror -Wextra -I.
+
+.PHONY: all re clean fclean
 all : $(NAME)
 
-$(MLX) :
-	@echo "Building libmlx."
-	@make -C minilibx/ all 2> /dev/null
-	@cp -v minilibx/$(MLX) $(MLX)
+$(NAME) : $(OBJ)
+	@echo "Building library."
+	$(AR) $(ARFLAGS) $(SRC)
 	@echo "______________________________"
 
-$(LIBFT) :
-	@echo "Building libft."
-	@make -C libft/ all clean
-	@cp -v libft/$(LIBFT) $(LIBFT)
-	@echo "______________________________"
-
-$(NAME) : $(MLX) $(LIBFT) $(OBJ)
-	@echo "Building executable."
-	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
-	@echo "______________________________"
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+$(OBJ_DIR)%.o : $(SRC_DIR)%.s
 	@echo "Building object."
 	@mkdir -vp $(OBJ_DIR)
-	$(CC) $(CFLAGS) $? -c -o $@
+	$(AS) $(ASFLAGS) $? -o $@
 	@echo "______________________________"
 
 clean :
-	@echo "Removing objects."
-	@rm -rfv $(OBJ)
-	@echo "______________________________"
-
-depclean :
-	@echo "Removing dependencies."
-	@rm -fv $(LIBFT) $(MLX)
+	@echo "Cleaning."
+	@rm -rv $(OBJ) $(NAME)
 	@echo "______________________________"
 
 fclean :
-	@echo "Removing lib."
-	@rm -fv $(NAME)
+	@echo "Forced cleaning."
+	@rm -rfv $(OBJ) $(NAME)
 	@echo "______________________________"
 
-re : fclean clean depclean all
+re : fclean clean all
