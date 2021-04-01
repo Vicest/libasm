@@ -2,11 +2,11 @@
 	section	.text
 _ft_strcpy:
 	mov		qword rax,-1
-NEXT_CHAR:
+.NEXT_CHAR:
 	inc		qword rax
-	mov		rbx,[rsi+rax]
-	mov		[rdi+rax],rbx
+	mov		rcx,[rsi+rax]
+	mov		[rdi+rax],rcx
 	cmp		byte [rsi+rax],0
-	jnz		NEXT_CHAR
-	add		rax,rdi
+	jnz		.NEXT_CHAR
+	mov		rax,rdi
 	retq

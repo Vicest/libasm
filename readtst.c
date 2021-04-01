@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libasm.h                                           :+:      :+:    :+:   */
+/*   readtst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 14:02:40 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/01 19:43:06 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/04/01 19:44:18 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/04/01 19:50:48 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBASM_H
-# define LIBASM_H
-# include <stdlib.h>
-# include <sys/types.h>
+#include <stdio.h>
+#include "libasm.h"
 
-size_t		ft_strlen(const char *s);
-char		*ft_strcpy(char *dst, const char *src);
-int			ft_strcmp(const char *s1, const char *s2);
-ssize_t		ft_read(int filedes, void *buf, size_t nbyte);
-#endif
+int	main(void)
+{
+	char	buf[12];
+
+	buf[11] = 0;
+	while (0 < ft_read(0, buf, 11))
+		printf("Here you go: %s\n", buf);
+	return (0);
+}

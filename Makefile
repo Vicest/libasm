@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/03/20 20:11:13 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/01 19:40:49 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ SRC_FILES :=
 SRC_FILES +=		ft_strlen.s
 SRC_FILES +=		ft_strcpy.s
 SRC_FILES +=		ft_strcmp.s
-SRC_FILES +=		ft_strdup.s
-SRC_FILES +=		ft_write.s
+#SRC_FILES +=		ft_strdup.s
+#SRC_FILES +=		ft_write.s
 SRC_FILES +=		ft_read.s
 OBJ_FILES := $(patsubst %.s, %.o, $(SRC_FILES))
 
@@ -31,7 +31,7 @@ SRC_DIR := sources/
 OBJ_DIR := objects/
 
 TST_FILES :=
-TST_FILES +=		tester.c
+TST_FILES +=		tests.c
 
 SRC :=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ :=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
@@ -52,14 +52,15 @@ AR := ar
 ARFLAGS := -rc
 
 CC := cc
-CFLAGS := -g -Wall -Werror -Wextra -I.
+CFLAGS := -g -Wall -Werror -Wextra -I. -L. -lasm
 
 .PHONY: all re clean fclean
 all : $(NAME)
+	$(CC) $(CFLAGS) $(TST_FILES) -o test
 
 $(NAME) : $(OBJ)
 	@echo "Building library."
-	$(AR) $(ARFLAGS) $(SRC)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 	@echo "______________________________"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.s
@@ -78,4 +79,4 @@ fclean :
 	@rm -rfv $(OBJ) $(NAME)
 	@echo "______________________________"
 
-re : fclean clean all
+re : clean all
