@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/02 20:08:02 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/02 20:38:38 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,20 +43,24 @@ NAME := libasm.a
 
 AS := ~/.brew/Cellar/nasm/2.15.05/bin/nasm
 ifeq ($(shell uname), Linux)
-ASFLAGS := -f elf64 -g
+ASFLAGS := -f elf64
 else
-ASFLAGS := -f macho64 -g
+ASFLAGS := -f macho64
 endif
 
 AR := ar
 ARFLAGS := -rc
 
 CC := cc
-CFLAGS := -g -Wall -Werror -Wextra -I. -L. -lasm
+CFLAGS := -Wall -Werror -Wextra -g -I. -L. -lasm
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean test
 all : $(NAME)
-	$(CC) $(CFLAGS) $(TST_FILES) -o test
+
+test : $(NAME) $(TST_FILES)
+	@echo "Preparing tests."
+	$(CC) $(CFLAGS) $(TST_FILES) -o other
+	@echo "Done, run:\n ./read [file] or ./write [file] and ./other the rest of tests."
 
 $(NAME) : $(OBJ)
 	@echo "Building library."
@@ -71,12 +75,12 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.s
 
 clean :
 	@echo "Cleaning."
-	@rm -rv $(OBJ) $(NAME) *.dSYM
+	@rm -rv $(OBJ) $(NAME) *.dSYM other
 	@echo "______________________________"
 
 fclean :
 	@echo "Forced cleaning."
-	@rm -rfv $(OBJ) $(NAME) *.dSYM
+	@rm -rfv $(OBJ) $(NAME) *.dSYM other
 	@echo "______________________________"
 
-re : clean all
+re : fclean all
