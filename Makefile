@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/01 19:40:49 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/02 13:04:53 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,12 +71,12 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.s
 
 clean :
 	@echo "Cleaning."
-	@rm -rv $(OBJ) $(NAME)
+	@rm -rv $(OBJ) $(NAME) *.dSYM
 	@echo "______________________________"
 
 fclean :
 	@echo "Forced cleaning."
-	@rm -rfv $(OBJ) $(NAME)
+	@rm -rfv $(OBJ) $(NAME) *.dSYM
 	@echo "______________________________"
 
 re : clean all
