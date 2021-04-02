@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/02 13:04:53 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/02 20:08:02 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ SRC_FILES :=
 SRC_FILES +=		ft_strlen.s
 SRC_FILES +=		ft_strcpy.s
 SRC_FILES +=		ft_strcmp.s
-#SRC_FILES +=		ft_strdup.s
-#SRC_FILES +=		ft_write.s
+SRC_FILES +=		ft_strdup.s
+SRC_FILES +=		ft_write.s
 SRC_FILES +=		ft_read.s
 OBJ_FILES := $(patsubst %.s, %.o, $(SRC_FILES))
 
