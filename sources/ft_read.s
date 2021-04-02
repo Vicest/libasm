@@ -4,9 +4,11 @@
 _ft_read:
 	mov		rax,0x2000003
 	syscall
-	cmp		rax,-1
-	jnz		.OUT
-
-	
-.OUT:
+	jnc		.CLEAN
+	push	rax
+	call	___error
+	pop		r10
+	mov		[rax],r10
+	mov		rax, -1
+.CLEAN
 	ret
