@@ -16,5 +16,3 @@ _ft_strdup:
 	call	_ft_strcpy
 .MALLOC_NOMEM:
 	ret			;ENOMEM set by malloc
-
-
