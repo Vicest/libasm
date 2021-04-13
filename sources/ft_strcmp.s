@@ -8,11 +8,10 @@ _ft_strcmp:
 	xor		rcx,rcx
 	mov		al,[rdi+rdx]
 	mov		cl,[rsi+rdx]
-	cmp		byte al,0
+	sub		eax,0
 	jz		.STR_END
 	sub		 eax,ecx
 	jz		.NEXT_CHAR
 	ret
 .STR_END:
-	sub		 eax,ecx
 	ret

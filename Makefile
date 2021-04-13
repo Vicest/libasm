@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/02 20:38:38 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/13 15:30:59 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ SRC_FILES +=		ft_read.s
 OBJ_FILES := $(patsubst %.s, %.o, $(SRC_FILES))
 
 SRC_BNS_FILES :=
-SRC_BNS_FILES +=		ft_atoi_base.s
-SRC_BNS_FILES +=		ft_list_push_front.s
+#SRC_BNS_FILES +=		ft_atoi_base.s
+#SRC_BNS_FILES +=		ft_list_push_front.s
 SRC_BNS_FILES +=		ft_list_size.s
-SRC_BNS_FILES +=		ft_list_size.s
-SRC_BNS_FILES +=		ft_list_remove_if.s
+#SRC_BNS_FILES +=		ft_list_size.s
+#SRC_BNS_FILES +=		ft_list_remove_if.s
 OBJ_BNS_FILES := $(patsubst %.s, %.o, $(SRC_BNS_FILES))
 
 SRC_DIR := sources/
@@ -54,7 +54,7 @@ ARFLAGS := -rc
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -g -I. -L. -lasm
 
-.PHONY: all re clean fclean test
+.PHONY: all bonus re clean fclean test
 all : $(NAME)
 
 test : $(NAME) $(TST_FILES)
@@ -66,6 +66,12 @@ $(NAME) : $(OBJ)
 	@echo "Building library."
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 	@echo "______________________________"
+
+bonus : $(NAME) $(OBJ_BNS)
+	@echo "Including bonus into libarary."
+	$(AR) $(ARFLAGS) $(NAME) $(OBJ_BNS)
+	@echo "______________________________"
+
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.s
 	@echo "Building object."

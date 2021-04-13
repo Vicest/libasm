@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:40:39 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/01 18:01:03 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/04/13 12:44:57 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,40 +132,9 @@ int		main(void)
 	tstcmp(s2 + 3, s3 + 3);
 
 
-
 	free(long_one);
 
 
 
 	return (0);
 }
-
-/*
-
-	memset(dst1, '1', 1024);
-	memset(dst2, '2', 1024);
-
-	bgn = clock();
-	printf("Compares:%p|%s\n",ft_strcpy(dst1, "Simple test."), dst1);
-	end = clock();
-	printf("B:%lu\nE:%lu\nTICKS:%lu\n", bgn, end, end - bgn);
-
-	bgn = clock();
-	printf("Compares:%p|%s\n",strcpy(dst2, "Simple test."), dst2);
-	end = clock();
-	printf("B:%lu\nE:%lu\nTICKS:%lu\n", bgn, end, end - bgn);
-	bgn = clock();
-	printf("MyCMP:%d\nTheCMP:%d\n", ft_strcmp("Simple \0plan", "Simple \0test."),
-			strcmp("Simple \0plan", "Simple \0test."));
-	end = clock();
-	printf("B:%lu\nE:%lu\nTICKS:%lu\n", bgn, end, end - bgn);
-
-	bgn = clock();
-	printf("MyCMP:%d\nTheCMP:%d\n", ft_strcmp("Simple plan", "Simple test."),
-			strcmp("Simple plan", "Simple test."));
-	end = clock();
-	printf("B:%lu\nE:%lu\nTICKS:%lu\n", bgn, end, end - bgn);
-
-}
-*/
-
