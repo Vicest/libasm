@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/13 15:30:59 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/16 18:49:30 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJ_FILES := $(patsubst %.s, %.o, $(SRC_FILES))
 
 SRC_BNS_FILES :=
 #SRC_BNS_FILES +=		ft_atoi_base.s
-#SRC_BNS_FILES +=		ft_list_push_front.s
+SRC_BNS_FILES +=		ft_create_elem.s
+SRC_BNS_FILES +=		ft_list_push_front.s
 SRC_BNS_FILES +=		ft_list_size.s
 #SRC_BNS_FILES +=		ft_list_size.s
 #SRC_BNS_FILES +=		ft_list_remove_if.s

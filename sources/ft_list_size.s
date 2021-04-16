@@ -6,7 +6,7 @@ _ft_list_size:
 	cmp		rdi,0
 	jz		.DONE
 	inc		rax
-	mov		rdi,[rdi]
+	mov		rdi,[rdi+8]
 	jmp		.NEXT
 .DONE:
 	ret
