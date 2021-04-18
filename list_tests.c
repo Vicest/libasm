@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:13:59 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/19 00:23:02 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/04/19 01:04:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	strcmp_vwrap(void *s1, void *s2)
 static int	zero(void *s1, void *s2)
 {
 	return (0);
-}
+	}
 
 int main(void)
 {
@@ -52,7 +52,7 @@ int main(void)
 	ft_list_push_front(&lst, ft_strdup("a"));
 	ft_list_push_front(&lst, ft_strdup("a"));
 	prnt_list(lst);
-	ft_list_remove_if(&lst, lst->data, strcmp_vwrap, free);
+	ft_list_remove_if(&lst, "a", strcmp_vwrap, free);
 	prnt_list(lst);
 	system("leaks -q a.out");
 

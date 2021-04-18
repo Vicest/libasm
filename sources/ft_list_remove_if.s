@@ -20,6 +20,7 @@ _ft_list_remove_if:
 	mov		rsi,r15
 	mov		rdi,[rbx]
 	call	r13
+	cmp		rax,0
 	jnz		.OUT_5;.NO_DEL
 	mov		rdi,[rbx]
 	call	r14
