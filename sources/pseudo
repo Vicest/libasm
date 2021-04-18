@@ -1,0 +1,25 @@
+ft_list-remove-if(**bgn_lst, *data_ref, int(*cmp()), void(free_fct()))
+	if(!bgn_lst)
+		ret
+head_loop:
+	node_ptr = *bgn_lst
+	if(*bgn_lst)
+	if (!cmp(...));
+		free_fct();
+		*bgn_lst = node_ptr->next;
+		free(node_ptr);
+		goto head_loop;
+tail_loop:
+	next_ptr = node_ptr->next
+	if (!next_ptr)
+		ret
+	if (cmp(next_ptr->data))
+		node_ptr->next = next_ptr;
+		jmp tail_loop;
+	else
+		free_fct();
+		node_ptr->next = next_ptr->next;
+		free(next_node);
+		goto tail_loop
+done
+

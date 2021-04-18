@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/16 18:49:30 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/18 20:44:58 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_BNS_FILES +=		ft_create_elem.s
 SRC_BNS_FILES +=		ft_list_push_front.s
 SRC_BNS_FILES +=		ft_list_size.s
 #SRC_BNS_FILES +=		ft_list_size.s
-#SRC_BNS_FILES +=		ft_list_remove_if.s
+SRC_BNS_FILES +=		ft_list_remove_if.s
 OBJ_BNS_FILES := $(patsubst %.s, %.o, $(SRC_BNS_FILES))
 
 SRC_DIR := sources/
@@ -46,7 +46,7 @@ AS := ~/.brew/Cellar/nasm/2.15.05/bin/nasm
 ifeq ($(shell uname), Linux)
 ASFLAGS := -f elf64
 else
-ASFLAGS := -f macho64
+ASFLAGS := -g -f macho64
 endif
 
 AR := ar

@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:02:40 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/16 20:37:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/04/18 20:33:22 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ ssize_t		ft_write(int filedes, const void *buf, size_t nbyte);
 t_list		*ft_create_elem(void *data);
 int			ft_list_size(t_list *begin_list);
 void		ft_list_push_front(t_list** begin_list, void *data);
+void		ft_list_remove_if(t_list **begin_list, void *data,
+		int (*cmp)(void *, void *), void (*free_fct)(void *));
 #endif
