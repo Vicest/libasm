@@ -25,6 +25,7 @@ _ft_list_remove_if:
 	call	r14
 	mov		rdi,rbx
 	mov		rbx,[rbx+8]
+	mov		[r12],rbx
 	call	_free
 	jmp		.HEAD_LOOP
 .OUT_5:
