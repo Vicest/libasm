@@ -21,7 +21,7 @@ _ft_list_remove_if:
 	mov		rdi,[rbx]
 	call	r13
 	cmp		rax,0
-	jnz		.OUT_5;.NO_DEL
+	jnz		.TAIL_LOOP
 	mov		rdi,[rbx]
 	call	r14
 	mov		rdi,rbx
@@ -29,6 +29,24 @@ _ft_list_remove_if:
 	mov		[r12],rbx
 	call	_free
 	jmp		.HEAD_LOOP
+.TAIL_LOOP:
+	cmp		qword [rbx+8],0
+	jz		.OUT_5
+	mov		r12,rbx
+	mov		rbx,[rbx+8]
+	mov		rsi,r15
+	mov		rdi,[rbx]
+	call	r13
+	cmp		rax,0
+	jnz		.TAIL_LOOP
+	mov		rdi,[rbx]
+	call	r14
+	mov		rdi,rbx
+	mov		rbx,[rbx+8]
+	mov		[r12+8],rbx
+	mov		rbx,r12
+	call	_free
+	jmp		.TAIL_LOOP
 .OUT_5:
 	pop		r15
 	pop		r14

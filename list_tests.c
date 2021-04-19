@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:13:59 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/19 01:04:35 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/04/19 01:31:31 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(void)
 	ft_list_push_front(&lst, ft_strdup("hola_bludo"));
 	ft_list_push_front(&lst, ft_strdup("a"));
 	ft_list_push_front(&lst, ft_strdup("a"));
-	ft_list_push_front(&lst, ft_strdup("a"));
+	ft_list_push_front(&lst, ft_strdup("lolailola"));
 	ft_list_push_front(&lst, ft_strdup("a"));
 	ft_list_push_front(&lst, ft_strdup("a"));
 	prnt_list(lst);
