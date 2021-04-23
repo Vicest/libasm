@@ -1,25 +1,40 @@
-ft_list-remove-if(**bgn_lst, *data_ref, int(*cmp()), void(free_fct()))
-	if(!bgn_lst)
-		ret
-head_loop:
-	node_ptr = *bgn_lst
-	if(*bgn_lst)
-	if (!cmp(...));
-		free_fct();
-		*bgn_lst = node_ptr->next;
-		free(node_ptr);
-		goto head_loop;
-tail_loop:
-	next_ptr = node_ptr->next
-	if (!next_ptr)
-		ret
-	if (cmp(next_ptr->data))
-		node_ptr->next = next_ptr;
-		jmp tail_loop;
-	else
-		free_fct();
-		node_ptr->next = next_ptr->next;
-		free(next_node);
-		goto tail_loop
-done
+ft_list_sort(t_list **bgn_lst, int (*cmp)())
+{
+	t_list *prev;
+	t_list *node1;
+	t_list *node2;
+	t_list *1stref
+
+	if (!bgn_lst)
+		out;
+	prev = bgn_list;
+	node1 = *bgn_lst;
+	1st_ref = node1;
+	node2 = node1->next;
+
+	while (node2)
+		while(node2)
+			if(cmp(node1->data, node2->data) > 0)
+				prev->next = node2;
+				node2->next = node1;
+			prev = prev->next;
+			node1 = prev->next;
+		prev = 1st_ref->next;
+		node1 = prev->next;
+		node2 = node1->next;
+	ret;
+}
+
+insert = node1;
+while (insert->next)
+	insert = insert->next;
+		prev = bgn_lst;
+		index = prev->next;
+		if (index == insert)
+			continue;
+	if (cmp(index, insert) > 0)
+		"do insert"
+		continue;
+	prev = index;
+	index = index->next;
 
