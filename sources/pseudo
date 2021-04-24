@@ -1,4 +1,4 @@
-ft_list_sort(t_list **bgn_lst, int (*cmp)())
+ft_list_sort(t_list **lst_ref, int (*cmp)())
 {
 	t_list *prev;
 	t_list *node1;
@@ -7,34 +7,19 @@ ft_list_sort(t_list **bgn_lst, int (*cmp)())
 
 	if (!bgn_lst)
 		out;
-	prev = bgn_list;
-	node1 = *bgn_lst;
-	1st_ref = node1;
-	node2 = node1->next;
 
-	while (node2)
-		while(node2)
-			if(cmp(node1->data, node2->data) > 0)
-				prev->next = node2;
-				node2->next = node1;
-			prev = prev->next;
-			node1 = prev->next;
-		prev = 1st_ref->next;
-		node1 = prev->next;
-		node2 = node1->next;
-	ret;
-}
-
-insert = node1;
+insert = *lst_ref;
 while (insert->next)
+	prev_insert = insert;
 	insert = insert->next;
-		prev = bgn_lst;
-		index = prev->next;
-		if (index == insert)
-			continue;
-	if (cmp(index, insert) > 0)
-		"do insert"
-		continue;
-	prev = index;
-	index = index->next;
+	prev = lst_ref;
+	index = prev->next;
+		while (index != insert)
+			if (cmp(index, insert) > 0)
+				prev_insert->next = insert->next;
+				insert->next = index;
+				prev->next = insert;
+				continue;
+			prev = index;
+			index = index->next;
 

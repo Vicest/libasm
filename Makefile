@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/18 20:44:58 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/24 20:40:00 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_BNS_FILES :=
 SRC_BNS_FILES +=		ft_create_elem.s
 SRC_BNS_FILES +=		ft_list_push_front.s
 SRC_BNS_FILES +=		ft_list_size.s
-#SRC_BNS_FILES +=		ft_list_size.s
+SRC_BNS_FILES +=		ft_list_sort.s
 SRC_BNS_FILES +=		ft_list_remove_if.s
 OBJ_BNS_FILES := $(patsubst %.s, %.o, $(SRC_BNS_FILES))
 
