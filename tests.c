@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:40:39 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/13 12:44:57 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:28:51 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,13 @@ static void	tstlen(const char *s)
 {
 	size_t	real;
 	size_t	lasm;
-	clock_t	step1;
-	clock_t	step2;
-	clock_t	step3;
 
-	step1 = clock();
 	real = strlen(s);
-	step2 = clock() - step1;
 	lasm = ft_strlen(s);
-	step3 = clock() - step2 - step1;
 	if (real != lasm)
 		printf("KO\n");
 	else
-		printf("OK\nTicks:\nReal:%6ld\nLasm:%6ld\n", step2, step3);
+		printf("OK\n");
 }
 
 static void	tstcpy(const char *s)
@@ -41,9 +35,6 @@ static void	tstcpy(const char *s)
 	char	*dst2;
 	char	*real;
 	char	*lasm;
-	clock_t	step1;
-	clock_t	step2;
-	clock_t	step3;
 
 	dst1 = calloc((size_t)INT_MAX + 42, sizeof(char));
 	dst2 = calloc((size_t)INT_MAX + 42, sizeof(char));
@@ -53,39 +44,52 @@ static void	tstcpy(const char *s)
 
 
 
-	step1 = clock();
 	real = strcpy(dst1, s);
-	step2 = clock() - step1;
 	lasm = ft_strcpy(dst2, s);
-	step3 = clock() - step2 - step1;
 	if (lasm != dst2 || strcmp(dst1, dst2) || strcmp(dst2, lasm))
 		printf("KO\n");
 	else
-		printf("OK\nTicks:\nReal:%6ld\nLasm:%6ld\n", step2, step3);
+		printf("OK\n");
 }
 
 static void	tstcmp(char *s1, char *s2)
 {
 	int	real;
 	int	lasm;
-	clock_t	step1;
-	clock_t	step2;
-	clock_t	step3;
 
-	step1 = clock();
 	real = strcmp(s1, s2);
-	step2 = clock() - step1;
 	lasm = ft_strcmp(s1, s2);
-	step3 = clock() - step2 - step1;
 
 	if (real == lasm || (real > 0 && lasm > 0) || (real < 0 && lasm < 0))
-		printf("OK\nTicks:\nReal:%6ld\nLasm:%6ld\n", step2, step3);
+		printf("OK\n");
 	else
 	{
 		printf("KO:%s<->%s\n", s1, s2);
 		printf("Real out: %d\nLasm out: %d\n", real, lasm);
 	}
+}
 
+static void	tstdup(const char *s)
+{
+	char	*real;
+	char	*lasm;
+
+	real = strdup(s);
+	lasm = ft_strdup(s);
+	if (!lasm || !real)
+	{
+		printf("Something's null: Lasm:%s|Real:%s\n", lasm, real);
+		return ;
+	}
+	if (lasm == real)
+		printf("KO/Cheeky btard.\n");
+	else if (!strcmp(real,lasm))
+		printf("OK\n");
+	else
+		printf("KO\n");
+	free(real);
+	printf("Free test, should not fail.\n");
+	free(lasm);
 }
 
 int		main(void)
@@ -131,6 +135,14 @@ int		main(void)
 	tstcmp(s5, s7);
 	tstcmp(s2 + 3, s3 + 3);
 
+	tstdup(s1);
+	tstdup(s2);
+	tstdup(s3);
+	tstdup(s4);
+	tstdup(s5);
+	tstdup(s6);
+	tstdup(s7);
+	tstdup(long_one);
 
 	free(long_one);
 

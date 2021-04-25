@@ -3,7 +3,6 @@
 _ft_list_sort:
 	cmp		rdi,0
 	jz		.OUT
-	push	0
 	push	rbx			;cmp
 	mov		rbx,rsi
 	push	r12			;prev
@@ -47,7 +46,6 @@ _ft_list_sort:
 	pop		r14
 	pop		r13
 	pop		r12
-	pop		rbx
 	pop		rax
 .OUT:
 	ret

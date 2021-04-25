@@ -11,8 +11,9 @@ _ft_strdup:
 	call	_malloc
 	cmp		rax,0
 	jz		.MALLOC_NOMEM
-	pop		rsi
+	mov		rsi,[rsp]
 	mov		rdi,rax
 	call	_ft_strcpy
 .MALLOC_NOMEM:
+	pop		rsi
 	ret			;ENOMEM set by malloc

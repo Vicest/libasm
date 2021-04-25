@@ -7,8 +7,9 @@ _ft_create_elem:
 	call	_malloc
 	cmp		rax,0
 	jz		.MALLOC_NOMEM
-	pop		rdi
+	mov		rdi,[rsp]
 	mov		[rax],rdi
 	mov		qword [rax+8],0
 .MALLOC_NOMEM:
+	pop		rdi
 	ret			;ENOMEM set by malloc

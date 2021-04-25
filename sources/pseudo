@@ -1,25 +1,15 @@
-ft_list_sort(t_list **lst_ref, int (*cmp)())
-{
-	t_list *prev;
-	t_list *node1;
-	t_list *node2;
-	t_list *1stref
-
-	if (!bgn_lst)
-		out;
-
-insert = *lst_ref;
-while (insert->next)
-	prev_insert = insert;
-	insert = insert->next;
-	prev = lst_ref;
-	index = prev->next;
-		while (index != insert)
-			if (cmp(index, insert) > 0)
-				prev_insert->next = insert->next;
-				insert->next = index;
-				prev->next = insert;
-				continue;
-			prev = index;
-			index = index->next;
-
+ft_atoi_base()
+	validate_base()
+		size_t bindex = -1;
+		while (base[++i])
+			if (base[i] == '-')
+				ret;
+			if (base[i] == '+')
+				ret;
+			if (isspace(base[i]))
+				ret;
+			if (next_char(base + i, i))
+				ret ;
+		if (bindex < 2)
+			ret ;
+	
