@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/04/24 20:40:00 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/04/25 14:17:39 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ OBJ_DIR := objects/
 
 TST_FILES :=
 TST_FILES +=		tests.c
+
+TST_BNS_FILES :=
+TST_BNS_FILES +=	list_tests.c
 
 SRC :=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ :=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
@@ -69,8 +72,10 @@ $(NAME) : $(OBJ)
 	@echo "______________________________"
 
 bonus : $(NAME) $(OBJ_BNS)
-	@echo "Including bonus into libarary."
+	@echo "Including bonus into library."
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ_BNS)
+	@echo "Building bonus tests, call with ./bonus."
+	$(CC) $(CFLAGS) $(TST_BNS_FILES) -o bonus
 	@echo "______________________________"
 
 

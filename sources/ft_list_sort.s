@@ -25,7 +25,8 @@ _ft_list_sort:
 	mov		rdi,[r13]
 	mov		rsi,[r14]
 	call	rbx
-	jge		.NEXT_INDEX
+	cmp		rax,0
+	jle		.NEXT_INDEX
 	mov		rax,[r14+8]
 	mov		[r15+8],rax
 	mov		[r14+8],r13
@@ -34,19 +35,19 @@ _ft_list_sort:
 	mov		[r12],r14
 	jmp		.NEXT_INSERT
 .NOT_FIRST:
-	mov		[r12+8],r13
+	mov		[r12+8],r14
 	jmp		.NEXT_INSERT
 .NEXT_INDEX:
 	mov		r12,r13
 	mov		r13,[r13+8]
 	jmp		.INSERTION_SEARCH
 .OUT_6:
-	pop		rax
-	pop		rax
-	pop		rax
-	pop		rax
-	pop		rax
-	pop		rax
+	pop		rdi
+	pop		r15
+	pop		r14
+	pop		r13
+	pop		r12
+	pop		rbx
 	pop		rax
 .OUT:
 	ret
