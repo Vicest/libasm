@@ -1,15 +1,15 @@
 ft_atoi_base()
 	validate_base()
-		size_t bindex = -1;
-		while (base[++i])
-			if (base[i] == '-')
-				ret;
-			if (base[i] == '+')
-				ret;
-			if (isspace(base[i]))
-				ret;
-			if (next_char(base + i, i))
-				ret ;
-		if (bindex < 2)
-			ret ;
-	
+	while (isspace(*str))
+		str++;
+	sign
+	if (*str == '+')
+		str++;
+		go sign
+	if (*str == '-')
+		str++;
+		go sign
+	while (i = strchr(*str++, base)
+		n *= base_len;
+		n += i;
+	ret;
