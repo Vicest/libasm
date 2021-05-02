@@ -3,11 +3,12 @@
 .NEXT_CHAR:
 	inc		rdi
 _ft_strchr:
-	xor		rax,rax
 	cmp		byte [rdi],0
 	jz		.NOT_FOUND
-	cmp		byte [rdi],rsi
+	cmp		byte [rdi],sil
 	jnz		.NEXT_CHAR
-	mov		rdi,rax
+	mov		rax,rdi
+	retq
 .NOT_FOUND:
+	xor		rax,rax
 	retq

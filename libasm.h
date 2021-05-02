@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:02:40 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/24 20:37:02 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:24:54 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char		*ft_strdup(const char *s1);
 ssize_t		ft_read(int filedes, void *buf, size_t nbyte);
 ssize_t		ft_write(int filedes, const void *buf, size_t nbyte);
 
+char		*ft_strchr(const char *s, int c);
+int			ft_atoi_base(char *str, char *base);
 t_list		*ft_create_elem(void *data);
 int			ft_list_size(t_list *begin_list);
 void		ft_list_push_front(t_list** begin_list, void *data);

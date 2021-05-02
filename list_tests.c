@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:13:59 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/25 18:56:16 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/05/02 21:26:47 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,16 @@ int main(void)
 	prnt_list(lst);
 	ft_list_sort(&lst, strcmp_vwrap);
 	prnt_list(lst);
-	system("leaks -q bonus");
 
+	printf("STRCHR: %s\n", ft_strchr("crthjrtlgrwht",'z'));
+	printf("Number: %i\n", ft_atoi_base("91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base(" 91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base("  91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base("   91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base("    91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base("     91","0123456789"));
+	printf("Number: %i\n", ft_atoi_base("      91","0123456789"));
+
+	system("leaks -q bonus");
 	return (0);
 }
