@@ -42,7 +42,7 @@ _ft_atoi_base:
 	sub		r12,[rsp]	;base_len
 	mov		rbx,0		;outval
 .SKIP_SPACES:
-	mov		rdi,[r13]
+	mov		byte dil,[r13]
 	call	_ft_isspace
 	cmp		rax,0
 	jz		.SIGN_MNGMNT
@@ -51,7 +51,7 @@ _ft_atoi_base:
 .NEXT_SIGN:
 	inc		r13
 .SIGN_MNGMNT:
-	mov		rdi,[r13]
+	mov		byte dil,[r13]
 	cmp		dil,0x2b
 	jz		.NEXT_SIGN
 	cmp		dil,0x2d
@@ -71,6 +71,7 @@ _ft_atoi_base:
 	push	rax
 	mov		rax,r12
 	mul		rbx
+	mov		rbx,rax
 	pop		rax
 	add		rbx,rax
 	inc		r13
