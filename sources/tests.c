@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:40:39 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/04/25 19:28:51 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/06/04 19:50:38 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void	tstlen(const char *s)
 
 	real = strlen(s);
 	lasm = ft_strlen(s);
+	printf("STRLEN: %lu|%lu\n", real, lasm);
+	if (real < 80)
+		printf("String: %s\n", s);
 	if (real != lasm)
 		printf("KO\n");
 	else
@@ -35,21 +38,25 @@ static void	tstcpy(const char *s)
 	char	*dst2;
 	char	*real;
 	char	*lasm;
+	size_t	len;
 
-	dst1 = calloc((size_t)INT_MAX + 42, sizeof(char));
-	dst2 = calloc((size_t)INT_MAX + 42, sizeof(char));
+	len = strlen(s) + 42;
+	dst1 = calloc(len, sizeof(char));
+	dst2 = calloc(len, sizeof(char));
+	memset(dst1, 42, (size_t)len - 1);
+	memset(dst2, 42, (size_t)len - 1);
+	real = strcpy(dst1 + 21, s);
+	lasm = ft_strcpy(dst2 + 21, s);
 
-	memset(dst1, 42, (size_t)INT_MAX + 41);
-	memset(dst2, 42, (size_t)INT_MAX + 41);
+	printf("Given string: %s\nReal mem with padding: %s\nLasm mem with padding: %s\n",
+			s, dst1, dst2);
 
-
-
-	real = strcpy(dst1, s);
-	lasm = ft_strcpy(dst2, s);
-	if (lasm != dst2 || strcmp(dst1, dst2) || strcmp(dst2, lasm))
+	if (lasm != dst2 + 21 || strcmp(dst1, dst2) || strcmp(real, lasm))
 		printf("KO\n");
 	else
 		printf("OK\n");
+	free(dst1);
+	free(dst2);
 }
 
 static void	tstcmp(char *s1, char *s2)
@@ -60,13 +67,11 @@ static void	tstcmp(char *s1, char *s2)
 	real = strcmp(s1, s2);
 	lasm = ft_strcmp(s1, s2);
 
+	printf("STRCMP: %s|%s\nReal out: %d\nLasm out: %d\n", s1, s2, real, lasm);
 	if (real == lasm || (real > 0 && lasm > 0) || (real < 0 && lasm < 0))
 		printf("OK\n");
 	else
-	{
 		printf("KO:%s<->%s\n", s1, s2);
-		printf("Real out: %d\nLasm out: %d\n", real, lasm);
-	}
 }
 
 static void	tstdup(const char *s)
@@ -81,23 +86,23 @@ static void	tstdup(const char *s)
 		printf("Something's null: Lasm:%s|Real:%s\n", lasm, real);
 		return ;
 	}
+	printf("Memory directions %p|%p\nString: %s\nReal dup: %s\nLasm dup: %s\n", real, lasm, s, real, lasm);
 	if (lasm == real)
 		printf("KO/Cheeky btard.\n");
 	else if (!strcmp(real,lasm))
 		printf("OK\n");
 	else
 		printf("KO\n");
+//	fflush(stdout);
 	free(real);
-	printf("Free test, should not fail.\n");
-	free(lasm);
+//	if (lasm)
+		free(lasm);
 }
 
 int		main(void)
 {
 	char	*long_one;
 	
-	long_one = calloc((size_t)INT_MAX + 42, sizeof(char));
-	memset(long_one, 42, (size_t)INT_MAX + 41);
 	printf("Strlen tests:\n");
 	tstlen("");
 	tstlen("\0Hidden");
@@ -105,7 +110,6 @@ int		main(void)
 	tstlen("Say hello the world, son!!");
 	tstlen("I like control \"chars\a\t\n\n\e\r\b, don't blame me.");
 	tstlen("Also this:'|\\{[}]-=≈åß∂™£¢∞™••¶•£™¶∞¢¶ªºœ∑´ˆˆ†∑œ´®ƒß∂å…åß∂µ≤≥");
-	tstlen(long_one);
 
 	printf("Strcpy tests:\n");
 	tstcpy("");
@@ -114,7 +118,6 @@ int		main(void)
 	tstcpy("Say hello the world, son!!");
 	tstcpy("I like control \"chars\a\t\n\n\e\r\b, don't blame me.");
 	tstcpy("Also this:'|\\{[}]-=≈åß∂™£¢∞™••¶•£™¶∞¢¶ªºœ∑´ˆˆ†∑œ´®ƒß∂å…åß∂µ≤≥");
-	tstcpy(long_one);
 
 	char	*s1 = "";
 	char	*s2 = "12\0q789";
@@ -135,6 +138,7 @@ int		main(void)
 	tstcmp(s5, s7);
 	tstcmp(s2 + 3, s3 + 3);
 
+	printf("Strdup tests:\n");
 	tstdup(s1);
 	tstdup(s2);
 	tstdup(s3);
@@ -142,11 +146,15 @@ int		main(void)
 	tstdup(s5);
 	tstdup(s6);
 	tstdup(s7);
+
+	system("leaks test");
+
+	printf("Long string tests:\n");
+	long_one = calloc((size_t)INT_MAX + 42, sizeof(char));
+	memset(long_one, 42, (size_t)INT_MAX + 41);
+	tstlen(long_one);
+	tstcpy(long_one);
 	tstdup(long_one);
-
 	free(long_one);
-
-
-
 	return (0);
 }

@@ -11,6 +11,8 @@ _ft_list_sort:
 	push	r15			;insert_prev
 	push	rdi			;lst_ref
 	mov		r14,[rdi]
+	cmp		rbx, 0
+	jz		.OUT_6
 .NEXT_INSERT:
 	mov		r15,r14
 	mov		r14,[r14+8]

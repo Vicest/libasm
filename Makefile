@@ -6,7 +6,7 @@
 #    By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 23:35:47 by vicmarti          #+#    #+#              #
-#    Updated: 2021/05/02 19:16:45 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/06/04 21:56:07 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,6 @@ OBJ_BNS_FILES := $(patsubst %.s, %.o, $(SRC_BNS_FILES))
 SRC_DIR := sources/
 OBJ_DIR := objects/
 
-TST_FILES :=
-TST_FILES +=		tests.c
-
-TST_BNS_FILES :=
-TST_BNS_FILES +=	list_tests.c
-
 SRC :=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ :=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
@@ -58,15 +52,22 @@ AR := ar
 ARFLAGS := -rc
 
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -g -I. -L. -lasm
+CFLAGS := -Wall -Werror -Wextra -I. -L. -lasm -g
 
-.PHONY: all bonus re clean fclean test
+.PHONY: all bonus re clean fclean tests
 all : $(NAME)
 
-test : $(NAME) $(TST_FILES)
+tests : $(NAME) $(SRC_DIR)tests.c $(SRC_DIR)readtst.c
 	@echo "Preparing tests."
-	$(CC) $(CFLAGS) $(TST_FILES) -o other
-	@echo "Done, run:\n ./read [file] or ./write [file] and ./other the rest of tests."
+	$(CC) $(CFLAGS) $(SRC_DIR)tests.c -o test
+	$(CC) $(CFLAGS) $(SRC_DIR)readtst.c -o rwtest
+	@echo "Done, run:\n ./rwtest [file] and ./test."
+
+btest : $(NAME) bonus $(TST_BNS_FILES)
+	@echo "Preparing bonus tests."
+	$(CC) $(CFLAGS) $(SRC_DIR)list_tests.c -o btest
+	@echo "Done, run:\n ./btest"
+
 
 $(NAME) : $(OBJ)
 	@echo "Building library."
@@ -76,8 +77,6 @@ $(NAME) : $(OBJ)
 bonus : $(NAME) $(OBJ_BNS)
 	@echo "Including bonus into library."
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ_BNS)
-	@echo "Building bonus tests, call with ./bonus."
-	$(CC) $(CFLAGS) $(TST_BNS_FILES) -o bonus
 	@echo "______________________________"
 
 
@@ -87,14 +86,11 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.s
 	$(AS) $(ASFLAGS) $? -o $@
 	@echo "______________________________"
 
-clean :
-	@echo "Cleaning."
-	@rm -rv $(OBJ) $(NAME) *.dSYM other
-	@echo "______________________________"
+clean : fclean
 
 fclean :
 	@echo "Forced cleaning."
-	@rm -rfv $(OBJ) $(NAME) *.dSYM other
+	@rm -rfv $(OBJ_DIR) $(NAME) *.dSYM test rwtest btest read_output write_output
 	@echo "______________________________"
 
 re : fclean all

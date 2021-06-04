@@ -14,6 +14,10 @@ _ft_list_remove_if:
 	mov		r13,rdx		;cmp
 	mov		r14,rcx		;free_fct
 	mov		r15,rsi		;data_ref
+	cmp		r13,0
+	jz		.OUT_5
+	cmp		r14,0
+	jz		.OUT_5
 .HEAD_LOOP:
 	cmp		rbx,0
 	jz		.OUT_5

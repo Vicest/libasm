@@ -58,7 +58,6 @@ _ft_atoi_base:
 	jnz		.NEXT_DIGIT
 	xor		r14,0x1
 	jmp		.NEXT_SIGN
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .NEXT_DIGIT:
 	xor		rsi,rsi
 	mov		byte sil,[r13]
@@ -66,8 +65,6 @@ _ft_atoi_base:
 	call	_ft_strchr
 	sub		rax,[rsp]
 	jl		.STR_END
-;	cmp		byte rax,0
-;	jz		.STR_END
 	push	rax
 	mov		rax,r12
 	mul		rbx

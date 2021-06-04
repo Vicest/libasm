@@ -6,14 +6,12 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:13:59 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/05/03 20:36:56 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/06/04 21:52:16 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <string.h> //TODO: Deleteme
+#include <string.h>
 #include "libasm.h"
 
 static void	tstatoi_base(char *str, char *base, int result)
@@ -71,6 +69,9 @@ int main(void)
 	prnt_list(lst);
 	printf("Remove from a NULL list should not crash.\n");
 	ft_list_remove_if(NULL, "aaa", strcmp_vwrap, free);
+	printf("Remove usinf NULL function should not crash.\n");
+	ft_list_remove_if(&lst, "aaa", NULL, free);
+	prnt_list(lst);
 	printf("Remove all nodes with the string \"aaa\", first element.\n");
 	ft_list_remove_if(&lst, "aaa", strcmp_vwrap, free);
 	prnt_list(lst);
@@ -79,6 +80,9 @@ int main(void)
 	prnt_list(lst);
 	printf("Remove all nodes with the string \"caa\", not first element.\n");
 	ft_list_remove_if(&lst, "caa", strcmp_vwrap, free);
+	prnt_list(lst);
+	//printf("Sort with a NULL function, no crash.\n");
+	//ft_list_sort(&lst, NULL);
 	prnt_list(lst);
 	printf("Sort a NULL list, no crash.\n");
 	ft_list_sort(NULL, strcmp_vwrap);
@@ -148,6 +152,6 @@ int main(void)
 	printf("Mixed:\n");
 	tstatoi_base("\n\f\n    \n\t\n\n+--++---+daa spartans", "abcdefghij", -300);
 
-	system("leaks -q bonus");
+	system("leaks -q btest");
 	return (0);
 }
