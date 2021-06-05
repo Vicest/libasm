@@ -6,7 +6,7 @@
 /*   By: vicmarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:44:18 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/06/04 21:34:14 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/06/05 19:01:09 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	src = open(argv[1], O_RDONLY);
-	dst = open("read_output", O_RDWR | O_CREAT);
+	dst = open("read_output", O_RDWR | O_CREAT, 0600);
 	while ((rout = ft_read(src, buf, 11)) > 0)
 	{
 		buf[rout] = 0;
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	close(dst);
 	close(src);
 	src = open(argv[1], O_RDONLY);
-	dst = open("write_output", O_RDWR | O_CREAT);
+	dst = open("write_output", O_RDWR | O_CREAT, 0600);
 	while ((rout = read(src, buf, 11)) > 0)
 	{
 		buf[rout] = 0;
